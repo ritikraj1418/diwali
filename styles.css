@@ -1,6 +1,83 @@
-:root{--bg:#0b1020;--accent:#FFD166;--text:#fff;}
-body{background:var(--bg);color:var(--text);font-family:Inter, sans-serif;margin:0;padding:0;text-align:center;}
-.hero{margin-top:20px;}
-.diya{width:100px;height:100px;position:relative;margin:auto;}
-.diya .flame{width:30px;height:50px;background:radial-gradient(circle at 50% 30%, #fff9d6 0%, #ffd166 12%, #ff7a00 55%);border-radius:50% 50% 20% 20%;animation:flame 1s infinite;}
-@keyframes flame{0%,100%{transform:scaleY(1)}50%{transform:scaleY(1.1)}}
+
+/* Soothing Diwali theme */
+:root{
+  --bg-deep:#070921;
+  --mid:#0b1840;
+  --card:#071433;
+  --gold1:#FFD166;
+  --gold2:#FFB86B;
+  --muted:rgba(255,255,255,0.75);
+  --glass: rgba(255,255,255,0.03);
+}
+
+*{box-sizing:border-box}
+html,body{height:100%;margin:0;font-family:Inter, system-ui, -apple-system, 'Segoe UI', Roboto, Arial;background:linear-gradient(180deg,var(--bg-deep),#020617);color:var(--muted);-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+.page-bg{
+  position:fixed;inset:0;pointer-events:none;background:
+  radial-gradient(800px 200px at 10% 10%, rgba(255,200,120,0.03), transparent 12%),
+  radial-gradient(600px 200px at 90% 20%, rgba(100,120,255,0.02), transparent 12%);
+  mix-blend-mode:overlay;opacity:0.9;
+}
+
+/* Layout */
+.wrap{max-width:1100px;margin:28px auto;padding:20px}
+.header{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px}
+.logo{display:flex;align-items:center;gap:12px}
+.logo-diya{width:44px;height:44px}
+.header h1{margin:0;font-size:1.15rem;letter-spacing:0.6px;color:var(--gold1)}
+.header-actions{display:flex;gap:12px;align-items:center}
+.icon-btn{background:transparent;border:1px solid rgba(255,255,255,0.04);padding:8px;border-radius:10px;color:var(--muted);cursor:pointer}
+.github-link{font-size:0.85rem;color:var(--muted);text-decoration:none;padding:8px 10px;border-radius:8px;background:var(--glass)}
+
+/* Grid */
+.main-grid{display:grid;grid-template-columns:1fr 380px;gap:20px}
+.card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border-radius:14px;padding:18px;box-shadow:0 10px 40px rgba(2,6,23,0.6);border:1px solid rgba(255,255,255,0.03)}
+.preview{min-height:480px;position:relative;overflow:hidden}
+.controls{position:sticky;top:24px;height:max-content}
+
+/* Decor */
+.lanterns{display:flex;gap:12px;justify-content:flex-start;opacity:0.95}
+.lantern{width:60px;filter:drop-shadow(0 10px 22px rgba(0,0,0,0.6));animation:float 6s ease-in-out infinite}
+.lantern-1{animation-delay:0s}
+.lantern-2{animation-delay:1.4s;transform:scale(0.95)}
+.lantern-3{animation-delay:2.4s;transform:scale(0.9)}
+
+@keyframes float{0%{transform:translateY(0)}50%{transform:translateY(-10px)}100%{transform:translateY(0)}}
+
+/* Diya area */
+.diya-area{display:flex;gap:18px;align-items:center;justify-content:center;margin-top:18px}
+.diya-img{width:120px;height:120px;filter:drop-shadow(0 12px 30px rgba(255,160,50,0.12))}
+.glow{position:absolute;width:220px;height:220px;border-radius:50%;background:radial-gradient(circle, rgba(255,200,120,0.12), transparent 30%);filter:blur(20px);transform:translateY(-10px);opacity:0.9;pointer-events:none;mix-blend-mode:screen;animation:glowPulse 3s infinite}
+@keyframes glowPulse{0%{transform:scale(0.98)}50%{transform:scale(1.03);}100%{transform:scale(0.98)}}
+
+.greeting-text h2{margin:0;font-size:1.4rem;color:white}
+.greeting-text p{margin:6px 0 0;color:rgba(255,255,255,0.75)}
+
+/* Sparkles / Fireworks */
+.sparkles-wrap{position:absolute;right:24px;top:14px;opacity:0.9}
+.firework{width:96px;height:96px;opacity:0.85;animation:fw 3s infinite}
+.firework.fw-2{animation-delay:1.25s;transform:scale(0.9)}
+@keyframes fw{0%{transform:scale(0.9);opacity:0.2}50%{transform:scale(1.05);opacity:1}100%{transform:scale(0.9);opacity:0.2}}
+
+/* Chain list */
+.chain-section{margin-top:22px}
+.chain-list{min-height:84px;padding:10px;border-radius:10px;background:linear-gradient(180deg, rgba(255,255,255,0.01), transparent);display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.chain-list .name{background:rgba(255,255,255,0.03);padding:8px 12px;border-radius:999px;font-weight:600;cursor:pointer;backdrop-filter:blur(4px)}
+.chain-note{font-size:0.82rem;color:rgba(255,255,255,0.5);margin-top:8px}
+
+/* Form */
+.form .field{display:block;margin-bottom:12px;font-size:0.95rem}
+.form input, .form select{width:100%;padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:var(--muted)}
+.actions{display:flex;gap:10px;margin-top:6px}
+.primary{flex:1;background:linear-gradient(90deg,var(--gold2),var(--gold1));border:0;padding:10px;border-radius:10px;color:#071433;font-weight:700;cursor:pointer}
+.ghost{background:transparent;border:1px solid rgba(255,255,255,0.06);padding:10px;border-radius:10px;color:var(--muted);cursor:pointer}
+.share-area{margin-top:12px;display:flex;flex-direction:column;gap:8px}
+.share-area input{padding:10px;border-radius:8px;border:1px dashed rgba(255,255,255,0.04);background:transparent;color:var(--muted)}
+.share-actions{display:flex;gap:8px}
+.footnote{font-size:0.82rem;color:rgba(255,255,255,0.5);margin-top:8px}
+
+/* Footer */
+.footer{display:flex;justify-content:space-between;margin-top:18px;font-size:0.9rem;color:rgba(255,255,255,0.6)}
+
+/* responsive */
+@media (max-width:900px){.main-grid{grid-template-columns:1fr}.header{flex-direction:column;align-items:flex-start}.lantern{width:46px}.diya-img{width:96px;height:96px}}
