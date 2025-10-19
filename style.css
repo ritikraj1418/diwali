@@ -460,22 +460,25 @@ h1 {
 /* Responsive Design */
 @media (max-width: 600px) {
     body {
-        overflow-y: auto; /* Allow scrolling on small screens if content overflows */
+        overflow-y: auto; /* Allow scrolling */
+        align-items: flex-start; /* Align card to the top */
+        padding-top: 5vh; /* Add space at the top */
+        padding-bottom: 60px; /* Add space at the bottom for the garland */
     }
     .card {
         padding: 1.5rem;
         padding-top: 3.5rem;
         margin: 1rem;
-        margin-bottom: 60px; /* Crucial: Pushes card up from the bottom to make space for garland */
+        margin-bottom: 0; /* Remove margin, body padding handles spacing */
     }
     h1 {
-        font-size: 3.2rem; /* Adjusted for smaller screens */
+        font-size: 3.2rem;
     }
     #sender-name-display {
-        font-size: 1.7rem !important; /* Keep it prominent but slightly smaller */
+        font-size: 1.5rem !important; /* Adjusted for better balance */
     }
     .message {
-        font-size: 0.9rem;
+        font-size: 1rem; /* Slightly larger for readability */
     }
     .input-group {
         flex-direction: column;
