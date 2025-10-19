@@ -1,0 +1,345 @@
+/* General Styling */
+:root {
+    --bg-color: #0c001f;
+    --card-bg: rgba(36, 11, 64, 0.6);
+    --gold-color: #ffd700;
+    --flame-orange: #ffab40;
+    --flame-yellow: #ffeb3b;
+    --text-color: #f0e6ff;
+    --purple-glow: #9d4edd;
+    --border-color: rgba(255, 215, 0, 0.3);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
+    color: var(--text-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    overflow: hidden;
+    position: relative;
+}
+
+#fireworksCanvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+}
+
+/* Main Content Card */
+.card {
+    position: relative;
+    z-index: 2;
+    background: var(--card-bg);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid var(--border-color);
+    border-radius: 20px;
+    padding: 2.5rem;
+    padding-top: 4rem;
+    margin: 1.5rem;
+    width: 90%;
+    max-width: 550px;
+    text-align: center;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    animation: fadeIn 1.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.9); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+h1 {
+    font-family: 'Tangerine', cursive;
+    font-size: 4.5rem;
+    color: var(--gold-color);
+    text-shadow: 0 0 10px var(--flame-orange), 0 0 20px var(--flame-orange);
+    margin-bottom: 0.5rem;
+}
+
+.message {
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+}
+
+/* Community Chain */
+.community-chain {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+    border: 1px solid var(--border-color);
+}
+
+.community-chain h2 {
+    font-size: 0.9rem;
+    font-weight: 300;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 0.5rem;
+    color: var(--gold-color);
+}
+
+#name-chain {
+    font-size: 1.1rem;
+    font-weight: 400;
+    color: var(--text-color);
+    word-wrap: break-word;
+}
+
+/* Share Section */
+.share-section p {
+    margin-bottom: 0.8rem;
+    font-size: 0.9rem;
+}
+
+.input-group {
+    display: flex;
+    gap: 0.5rem;
+}
+
+#userName {
+    flex-grow: 1;
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 0.8rem;
+    color: var(--text-color);
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+#userName:focus {
+    outline: none;
+    border-color: var(--gold-color);
+    box-shadow: 0 0 10px var(--gold-color);
+}
+
+#shareButton {
+    background: linear-gradient(145deg, var(--flame-orange), var(--gold-color));
+    border: none;
+    border-radius: 8px;
+    padding: 0.8rem 1.2rem;
+    color: #331a00;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(255, 171, 64, 0.4);
+}
+
+#shareButton:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(255, 215, 0, 0.6);
+}
+
+/* Top Diya Animation */
+.diya-top {
+    position: absolute;
+    top: -50px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 80px;
+}
+
+.diya-body {
+    width: 60px;
+    height: 30px;
+    background: linear-gradient(180deg, #ffc107, #e65100);
+    border-radius: 0 0 30px 30px;
+    position: absolute;
+    bottom: 0;
+}
+
+.diya-body::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 5px;
+    width: 50px;
+    height: 15px;
+    background: #ff8f00;
+    border-radius: 50%;
+}
+
+.diya-wick {
+    width: 4px;
+    height: 10px;
+    background: #5d4037;
+    position: absolute;
+    bottom: 25px;
+    left: 28px;
+}
+
+.diya-flame {
+    width: 20px;
+    height: 40px;
+    background: var(--flame-orange);
+    border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+    position: absolute;
+    bottom: 30px;
+    left: 20px;
+    transform-origin: 50% 100%;
+    animation: flicker 1s ease-in-out infinite;
+    box-shadow: 0 0 10px var(--flame-orange), 0 0 20px var(--flame-orange), 0 0 40px var(--flame-yellow);
+}
+
+@keyframes flicker {
+    0%, 100% { transform: scaleY(1) scaleX(1); }
+    50% { transform: scaleY(0.95) scaleX(1.05); }
+}
+
+/* Floating Lanterns */
+.lantern-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    pointer-events: none;
+}
+
+.lantern {
+    position: absolute;
+    bottom: -100px;
+    width: 50px;
+    height: 80px;
+    background: radial-gradient(circle, var(--flame-yellow), var(--flame-orange) 70%);
+    border-radius: 40% 40% 20% 20%;
+    box-shadow: 0 0 20px var(--flame-orange), 0 0 40px var(--flame-orange);
+    animation: floatUp var(--lantern-duration) linear var(--lantern-delay) infinite;
+    opacity: 0.8;
+}
+
+@keyframes floatUp {
+    from { bottom: -100px; transform: translateX(0); opacity: 0.8; }
+    to { bottom: 100vh; transform: translateX(50px) scale(1.2); opacity: 0; }
+}
+
+/* Bottom Diya Garland */
+.diya-garland {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 50px;
+    z-index: 3;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.garland-diya {
+    position: relative;
+    width: 40px;
+    height: 40px;
+    margin: 0 -5px;
+    animation: swing 4s ease-in-out infinite alternate;
+}
+
+.garland-diya .diya-body { width: 40px; height: 20px; }
+.garland-diya .diya-body::before { width: 30px; left: 5px; height: 10px; }
+.garland-diya .diya-wick { bottom: 16px; left: 18px; height: 8px; }
+.garland-diya .diya-flame { width: 14px; height: 28px; bottom: 20px; left: 13px; }
+
+@keyframes swing {
+    from { transform: rotate(-5deg); }
+    to { transform: rotate(5deg); }
+}
+
+/* Modal Styling */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+}
+
+.modal-content {
+    background: var(--card-bg);
+    padding: 2rem;
+    border-radius: 15px;
+    border: 1px solid var(--border-color);
+    width: 90%;
+    max-width: 400px;
+    text-align: center;
+    position: relative;
+}
+
+.close-button {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    background: none;
+    border: none;
+    color: var(--text-color);
+    font-size: 1.8rem;
+    cursor: pointer;
+}
+
+#shareLinkInput {
+    width: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 0.7rem;
+    color: var(--text-color);
+    margin: 1rem 0;
+    font-size: 0.9rem;
+}
+
+#copyButton {
+    background: var(--purple-glow);
+    color: white;
+    padding: 0.7rem 1.5rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    width: 100%;
+}
+
+.copy-feedback {
+    margin-top: 0.5rem;
+    color: var(--gold-color);
+    font-size: 0.9rem;
+    height: 1.2rem;
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+    .card {
+        padding: 2rem;
+        padding-top: 3.5rem;
+    }
+    h1 {
+        font-size: 3.5rem;
+    }
+    .message {
+        font-size: 0.9rem;
+    }
+    .input-group {
+        flex-direction: column;
+    }
+}

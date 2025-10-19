@@ -1,105 +1,71 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Diwali Community Wish — Share the Light</title>
-  <meta name="description" content="A warm, animated Diwali wish you can share to build a community chain of wishes." />
-  <link rel="stylesheet" href="styles.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Diwali!</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Tangerine:wght@700&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
 </head>
 <body>
-  <div class="page-bg"></div>
-  <main class="wrap">
-    <header class="header">
-      <div class="logo">
-        <img src="assets/diya.svg" alt="" class="logo-diya" />
-        <h1>Share the Light</h1>
-      </div>
-      <div class="header-actions">
-        <button id="musicToggle" class="icon-btn" aria-pressed="false" title="Toggle background music">🔈</button>
-        <a class="github-link" href="#" onclick="alert('Upload these files to GitHub and enable Pages');return false;">Deploy → GitHub Pages</a>
-      </div>
-    </header>
 
-    <section class="main-grid">
-      <article class="card preview" id="cardPreview" aria-live="polite">
-        <div class="decor-top">
-          <div class="lanterns" aria-hidden="true">
-            <img src="assets/lantern.svg" class="lantern lantern-1" />
-            <img src="assets/lantern.svg" class="lantern lantern-2" />
-            <img src="assets/lantern.svg" class="lantern lantern-3" />
-          </div>
+    <!-- Canvas for background animations -->
+    <canvas id="fireworksCanvas"></canvas>
 
-          <div class="diya-area">
-            <div class="diya-anim" aria-hidden="true">
-              <img src="assets/diya.svg" class="diya-img" />
-              <div class="glow"></div>
-            </div>
-            <div class="greeting-text">
-              <h2 id="greeting">Wishing you a Joyful Diwali</h2>
-              <p id="sub">May your life be filled with light, laughter & love.</p>
-            </div>
-          </div>
-
-          <div class="sparkles-wrap" aria-hidden="true">
-            <img src="assets/firework.svg" class="firework fw-1" />
-            <img src="assets/firework.svg" class="firework fw-2" />
-          </div>
+    <!-- Floating Lanterns -->
+    <div class="lantern-container">
+        <div class="lantern" style="--lantern-delay: 0s; --lantern-duration: 15s; left: 10%;"></div>
+        <div class="lantern" style="--lantern-delay: 2s; --lantern-duration: 12s; left: 30%;"></div>
+        <div class="lantern" style="--lantern-delay: 5s; --lantern-duration: 18s; left: 50%;"></div>
+        <div class="lantern" style="--lantern-delay: 8s; --lantern-duration: 14s; left: 70%;"></div>
+        <div class="lantern" style="--lantern-delay: 10s; --lantern-duration: 20s; left: 90%;"></div>
+    </div>
+    
+    <main class="card">
+        <div class="diya-top">
+            <div class="diya-flame"></div>
+            <div class="diya-wick"></div>
+            <div class="diya-body"></div>
         </div>
 
-        <div class="chain-section">
-          <h3>Community Chain</h3>
-          <div id="chainList" class="chain-list">No names yet — be the first to share!</div>
-          <p class="chain-note">Click any name to set them as recipient when you create a new wish.</p>
+        <h1>Happy Diwali</h1>
+        <p class="message">
+            May the divine light of Diyas spread peace, prosperity, happiness, and good health in your life. Wishing you a luminous and joyful celebration!
+        </p>
+
+        <div class="community-chain">
+            <h2>Wishes From:</h2>
+            <p id="name-chain">Your Friends & Family</p>
         </div>
-      </article>
 
-      <aside class="card controls">
-        <form id="shareForm" class="form" onsubmit="return false" aria-label="Create and share Diwali wish">
-          <label class="field">Your name
-            <input id="yourName" placeholder="e.g. Ritik" autocomplete="name" />
-          </label>
-
-          <label class="field">Recipient (optional)
-            <input id="recipientName" placeholder="e.g. Anjali" />
-          </label>
-
-          <label class="field tone">Message tone
-            <select id="tone">
-              <option value="modern">Modern & Friendly</option>
-              <option value="spiritual">Spiritual & Traditional</option>
-            </select>
-          </label>
-
-          <div class="actions">
-            <button id="createBtn" class="primary">Create & Generate Link</button>
-            <button id="addMyNameBtn" class="ghost">Add my name to chain</button>
-          </div>
-
-          <div id="shareArea" class="share-area" hidden>
-            <input id="shareLink" readonly />
-            <div class="share-actions">
-              <button id="copyBtn" type="button">Copy</button>
-              <button id="mailBtn" type="button">Email</button>
+        <div class="share-section">
+            <p>Add your name to the chain & share the light!</p>
+            <div class="input-group">
+                <input type="text" id="userName" placeholder="Enter Your Name" aria-label="Enter Your Name">
+                <button id="shareButton">Share The Wish</button>
             </div>
-          </div>
+        </div>
+    </main>
 
-          <div class="footnote">Tip: Links encode the chain. For very long chains the app falls back to localStorage.</div>
-        </form>
-      </aside>
-    </section>
-
-    <footer class="footer">
-      <div>Made with ❤️ — Light up your circle.</div>
-      <div class="credits">You can toggle music & animations</div>
+    <!-- Diya Garland at the bottom -->
+    <footer class="diya-garland">
+        <!-- JS will populate this -->
     </footer>
-  </main>
+    
+    <!-- Modal for sharing link -->
+    <div id="shareModal" class="modal-overlay" style="display: none;">
+        <div class="modal-content">
+            <button id="closeModal" class="close-button">&times;</button>
+            <h3>Your Link is Ready!</h3>
+            <p>Copy the link below and share it with your loved ones.</p>
+            <input type="text" id="shareLinkInput" readonly>
+            <button id="copyButton">Copy to Clipboard</button>
+            <p id="copyFeedback" class="copy-feedback"></p>
+        </div>
+    </div>
 
-  <audio id="bgMusic" loop preload="none">
-    <!-- Place a file at assets/diwali_soft.mp3 to enable. -->
-    <source src="assets/diwali_soft.mp3" type="audio/mpeg" />
-  </audio>
-
-  <script src="script.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
