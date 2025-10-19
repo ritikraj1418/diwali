@@ -460,25 +460,24 @@ h1 {
 /* Responsive Design */
 @media (max-width: 600px) {
     body {
-        overflow-y: auto; /* Allow scrolling */
-        align-items: flex-start; /* Align card to the top */
-        padding-top: 5vh; /* Add space at the top */
-        padding-bottom: 60px; /* Add space at the bottom for the garland */
+        overflow-y: auto; /* Allow scrolling on small devices */
+        align-items: flex-start; /* Don't center vertically, align to top */
+        padding-top: 70px; /* Increased top padding to ensure top Diya is visible */
+        padding-bottom: 70px; /* Increased bottom padding to prevent overlap with garland */
     }
     .card {
-        padding: 1.5rem;
+        padding: 1.5rem 1.2rem;
         padding-top: 3.5rem;
-        margin: 1rem;
-        margin-bottom: 0; /* Remove margin, body padding handles spacing */
+        margin: 0 1rem; /* Only apply side margins */
     }
     h1 {
-        font-size: 3.2rem;
+        font-size: 3rem; /* Slightly smaller to save space */
     }
     #sender-name-display {
         font-size: 1.5rem !important; /* Adjusted for better balance */
     }
     .message {
-        font-size: 1rem; /* Slightly larger for readability */
+        font-size: 0.95rem; /* Slightly smaller to save space */
     }
     .input-group {
         flex-direction: column;
