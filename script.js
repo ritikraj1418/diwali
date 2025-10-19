@@ -43,6 +43,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const closeModalButton = document.getElementById('closeModal');
     const copyButton = document.getElementById('copyButton');
     const copyFeedback = document.getElementById('copyFeedback');
+    const whatsappShareLink = document.getElementById('whatsappShareLink');
 
     function showToast(message) {
         const toast = document.getElementById('toast-notification');
@@ -80,6 +81,11 @@ document.addEventListener('DOMContentLoaded', () => {
         const newUrl = `${window.location.origin}${window.location.pathname}?from=${encodeURIComponent(yourName)}`;
         
         shareLinkInput.value = newUrl;
+        
+        // Create and update the WhatsApp share link
+        const whatsappMessage = `*Happy Diwali!* ✨\n\nI'm sending you this special greeting. May the festival of lights bring you joy and prosperity!\n\n_Sent by: ${yourName}_\n\nSee your wish here: ${newUrl}`;
+        whatsappShareLink.href = `https://wa.me/?text=${encodeURIComponent(whatsappMessage)}`;
+        
         shareModal.style.display = 'flex';
         copyFeedback.textContent = '';
     });
