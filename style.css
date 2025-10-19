@@ -222,6 +222,14 @@ h1 {
     box-shadow: 0 6px 20px rgba(255, 215, 0, 0.6);
 }
 
+.creator-credit {
+    margin-top: 2rem;
+    font-size: 0.8rem;
+    color: var(--text-color);
+    opacity: 0.6;
+    letter-spacing: 0.5px;
+}
+
 /* Top Diya Animation */
 .diya-top {
     position: absolute;
