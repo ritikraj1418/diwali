@@ -16,12 +16,10 @@ document.addEventListener('DOMContentLoaded', () => {
             volumeOffIcon.style.display = 'none';
         }).catch(error => {
             console.log("Music playback failed, user may need to interact with the mute button.", error);
-            // Even if it fails, hide the overlay. The user can use the manual toggle.
         });
 
-    }, { once: true }); // This listener will only run once.
+    }, { once: true });
     
-    // Toggle music play/pause
     musicToggleButton.addEventListener('click', () => {
         if (music.paused) {
             music.play();
@@ -34,96 +32,85 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-
-    // --- Community Chain Logic ---
-    const nameChainEl = document.getElementById('name-chain');
+    // --- Wishing & Sharing Logic ---
+    const wishesHeaderEl = document.getElementById('wishes-header');
+    const senderNameDisplayEl = document.getElementById('sender-name-display');
     const userNameInput = document.getElementById('userName');
     const shareButton = document.getElementById('shareButton');
     
-    // Modal elements
     const shareModal = document.getElementById('shareModal');
     const shareLinkInput = document.getElementById('shareLinkInput');
     const closeModalButton = document.getElementById('closeModal');
     const copyButton = document.getElementById('copyButton');
     const copyFeedback = document.getElementById('copyFeedback');
 
-    let currentNames = [];
-
-    // --- Toast Notification Logic ---
     function showToast(message) {
         const toast = document.getElementById('toast-notification');
         toast.textContent = message;
         toast.classList.add('show');
         setTimeout(() => {
             toast.classList.remove('show');
-        }, 3000); // Hide after 3 seconds
+        }, 3000);
     }
 
-
-    // Function to update the name chain display
-    function updateNameChain() {
+    // Function to get the sender's name from the URL and display it
+    function displaySenderName() {
         const urlParams = new URLSearchParams(window.location.search);
-        const namesParam = urlParams.get('names');
+        const senderName = urlParams.get('from');
         
-        if (namesParam) {
-            currentNames = namesParam.split(',').map(name => decodeURIComponent(name.trim()));
-            nameChainEl.textContent = currentNames.join(' → ');
+        if (senderName) {
+            wishesHeaderEl.textContent = "A Special Wish From:";
+            senderNameDisplayEl.textContent = decodeURIComponent(senderName.trim());
         } else {
-            nameChainEl.innerHTML = `<em>Be the first to share the light!</em>`;
+            // This is the default state if no name is in the URL
+            wishesHeaderEl.textContent = "A Wish For You";
+            senderNameDisplayEl.textContent = "This beautiful wish is sent to you with joy.";
         }
     }
 
     // Share button click handler
     shareButton.addEventListener('click', () => {
-        const newName = userNameInput.value.trim();
-        if (!newName) {
-            showToast('Please enter your name.'); // Replaced alert
+        const yourName = userNameInput.value.trim();
+        if (!yourName) {
+            showToast('Please enter your name.');
             return;
         }
 
-        const newNamesList = [...currentNames, newName];
-        const newNamesParam = newNamesList.map(name => encodeURIComponent(name)).join(',');
-
-        const newUrl = `${window.location.origin}${window.location.pathname}?names=${newNamesParam}`;
+        // The new URL will only contain the new sender's name
+        const newUrl = `${window.location.origin}${window.location.pathname}?from=${encodeURIComponent(yourName)}`;
         
         shareLinkInput.value = newUrl;
         shareModal.style.display = 'flex';
         copyFeedback.textContent = '';
     });
     
-    // Modal close button
+    // Modal handling
     closeModalButton.addEventListener('click', () => {
         shareModal.style.display = 'none';
     });
     
-    // Close modal if clicked outside
     window.addEventListener('click', (event) => {
         if (event.target === shareModal) {
             shareModal.style.display = 'none';
         }
     });
 
-    // Copy to clipboard
     copyButton.addEventListener('click', () => {
         shareLinkInput.select();
-        shareLinkInput.setSelectionRange(0, 99999); // For mobile devices
-
+        shareLinkInput.setSelectionRange(0, 99999);
         try {
             document.execCommand('copy');
             copyFeedback.textContent = 'Copied to clipboard!';
         } catch (err) {
-            copyFeedback.textContent = 'Could not copy. Please copy manually.';
-            console.error('Failed to copy text: ', err);
+            copyFeedback.textContent = 'Could not copy.';
         }
     });
     
-
-    // --- Fireworks Canvas Logic ---
+    // --- Canvas & Animation Logic (No changes here) ---
     const canvas = document.getElementById('fireworksCanvas');
     const ctx = canvas.getContext('2d');
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
-
     let fireworks = [];
     let particles = [];
 
@@ -137,17 +124,12 @@ document.addEventListener('DOMContentLoaded', () => {
             this.angle = Math.atan2(this.targetY - this.y, this.targetX - this.x);
             this.hue = Math.random() * 360;
         }
-
         update() {
             this.x += Math.cos(this.angle) * this.speed;
             this.y += Math.sin(this.angle) * this.speed;
-            this.speed *= 1.01; // Accelerate slightly
-            if (this.y < this.targetY) {
-                return true; // Explode
-            }
-            return false;
+            this.speed *= 1.01;
+            return this.y < this.targetY;
         }
-
         draw() {
             ctx.fillStyle = `hsl(${this.hue}, 100%, 50%)`;
             ctx.beginPath();
@@ -168,14 +150,12 @@ document.addEventListener('DOMContentLoaded', () => {
             this.alpha = 1;
             this.decay = Math.random() * 0.03 + 0.01;
         }
-
         update() {
             this.speed *= this.friction;
             this.x += Math.cos(this.angle) * this.speed;
             this.y += Math.sin(this.angle) * this.speed + this.gravity;
             this.alpha -= this.decay;
         }
-
         draw() {
             ctx.globalAlpha = this.alpha;
             ctx.fillStyle = `hsl(${this.hue}, 100%, 50%)`;
@@ -187,8 +167,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function createParticles(x, y, hue) {
-        const particleCount = 100;
-        for (let i = 0; i < particleCount; i++) {
+        for (let i = 0; i < 100; i++) {
             particles.push(new Particle(x, y, hue));
         }
     }
@@ -196,11 +175,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function animate() {
         ctx.fillStyle = 'rgba(0, 0, 0, 0.1)';
         ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-        if (Math.random() < 0.03) {
-            fireworks.push(new Firework());
-        }
-
+        if (Math.random() < 0.03) fireworks.push(new Firework());
         for (let i = fireworks.length - 1; i >= 0; i--) {
             fireworks[i].draw();
             if (fireworks[i].update()) {
@@ -208,15 +183,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 fireworks.splice(i, 1);
             }
         }
-
         for (let i = particles.length - 1; i >= 0; i--) {
             particles[i].draw();
             particles[i].update();
-            if (particles[i].alpha <= 0) {
-                particles.splice(i, 1);
-            }
+            if (particles[i].alpha <= 0) particles.splice(i, 1);
         }
-
         requestAnimationFrame(animate);
     }
 
@@ -224,12 +195,10 @@ document.addEventListener('DOMContentLoaded', () => {
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
     });
-
     
-    // --- Diya Garland Logic ---
     function createDiyaGarland() {
         const garland = document.querySelector('.diya-garland');
-        const numDiyas = Math.floor(window.innerWidth / 35); // Adjust density
+        const numDiyas = Math.floor(window.innerWidth / 35);
         let garlandHTML = '';
         for (let i = 0; i < numDiyas; i++) {
             garlandHTML += `
@@ -237,15 +206,13 @@ document.addEventListener('DOMContentLoaded', () => {
                     <div class="diya-flame"></div>
                     <div class="diya-wick"></div>
                     <div class="diya-body"></div>
-                </div>
-            `;
+                </div>`;
         }
         garland.innerHTML = garlandHTML;
     }
 
-
     // --- Initializations ---
-    updateNameChain();
+    displaySenderName();
     createDiyaGarland();
     animate();
 });
