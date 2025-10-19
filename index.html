@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Diwali Community Wish — Share the Light</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="container">
+    <header class="hero">
+      <h1>Share the Light — Happy Diwali ✨</h1>
+      <p class="sub">Create an animated Diwali wish and invite someone to carry the chain forward.</p>
+    </header>
+    <section class="content">
+      <article class="card" id="cardPreview">
+        <div class="top-decor">
+          <div class="diya-wrap">
+            <div class="diya">
+              <div class="flame"></div>
+              <div class="wax"></div>
+            </div>
+            <div class="greetings">
+              <div id="greeting">Wishing you a joyful Diwali!</div>
+              <div id="subtitle">May your life be full of light & cheer</div>
+            </div>
+          </div>
+        </div>
+        <div class="chain-area">
+          <h3>Community Chain</h3>
+          <div id="chainList" class="chain-list">No names yet — be the first to share!</div>
+        </div>
+      </article>
+      <form id="shareForm" class="share-form">
+        <label>Your name <input id="yourName" placeholder="e.g. Ritik"></label>
+        <label>Recipient name <input id="recipientName" placeholder="e.g. Anjali"></label>
+        <button type="button" id="createBtn">Create & Generate Link</button>
+      </form>
+    </section>
+    <footer class="footer">Made with ❤️ for Diwali</footer>
+  </main>
+  <script src="script.js"></script>
+</body>
+</html>

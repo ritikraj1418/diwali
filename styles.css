@@ -1,0 +1,6 @@
+:root{--bg:#0b1020;--accent:#FFD166;--text:#fff;}
+body{background:var(--bg);color:var(--text);font-family:Inter, sans-serif;margin:0;padding:0;text-align:center;}
+.hero{margin-top:20px;}
+.diya{width:100px;height:100px;position:relative;margin:auto;}
+.diya .flame{width:30px;height:50px;background:radial-gradient(circle at 50% 30%, #fff9d6 0%, #ffd166 12%, #ff7a00 55%);border-radius:50% 50% 20% 20%;animation:flame 1s infinite;}
+@keyframes flame{0%,100%{transform:scaleY(1)}50%{transform:scaleY(1.1)}}
