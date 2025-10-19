@@ -1,26 +1,28 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-    // --- Background Music Logic ---
     const music = document.getElementById('bg-music');
     const musicToggleButton = document.getElementById('music-toggle');
     const volumeOnIcon = musicToggleButton.querySelector('.feather-volume-2');
     const volumeOffIcon = musicToggleButton.querySelector('.feather-volume-x');
-    let hasInteracted = false;
+    const entryOverlay = document.getElementById('entry-overlay');
 
-    // Attempt to play music, browsers might block this until user interaction
-    function playMusic() {
-        if (!hasInteracted) return; // Wait for interaction
+    // --- Entry and Music Logic ---
+    entryOverlay.addEventListener('click', () => {
+        entryOverlay.classList.add('hidden');
+        
         music.play().then(() => {
+            // Success
             volumeOnIcon.style.display = 'block';
             volumeOffIcon.style.display = 'none';
         }).catch(error => {
-            console.log("Autoplay was prevented. Waiting for user interaction.", error);
+            console.log("Music playback failed, user may need to interact with the mute button.", error);
+            // Even if it fails, hide the overlay. The user can use the manual toggle.
         });
-    }
+
+    }, { once: true }); // This listener will only run once.
     
     // Toggle music play/pause
     musicToggleButton.addEventListener('click', () => {
-        hasInteracted = true; // Mark interaction
         if (music.paused) {
             music.play();
             volumeOnIcon.style.display = 'block';
@@ -31,15 +33,6 @@ document.addEventListener('DOMContentLoaded', () => {
             volumeOffIcon.style.display = 'block';
         }
     });
-
-    // A common workaround for browser autoplay policies:
-    // Play music on the first click anywhere on the page.
-    document.body.addEventListener('click', () => {
-        if (!hasInteracted) {
-            hasInteracted = true;
-            playMusic();
-        }
-    }, { once: true }); // The listener will only run once
 
 
     // --- Community Chain Logic ---
@@ -55,6 +48,17 @@ document.addEventListener('DOMContentLoaded', () => {
     const copyFeedback = document.getElementById('copyFeedback');
 
     let currentNames = [];
+
+    // --- Toast Notification Logic ---
+    function showToast(message) {
+        const toast = document.getElementById('toast-notification');
+        toast.textContent = message;
+        toast.classList.add('show');
+        setTimeout(() => {
+            toast.classList.remove('show');
+        }, 3000); // Hide after 3 seconds
+    }
+
 
     // Function to update the name chain display
     function updateNameChain() {
@@ -73,7 +77,7 @@ document.addEventListener('DOMContentLoaded', () => {
     shareButton.addEventListener('click', () => {
         const newName = userNameInput.value.trim();
         if (!newName) {
-            alert('Please enter your name.');
+            showToast('Please enter your name.'); // Replaced alert
             return;
         }
 
