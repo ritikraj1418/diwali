@@ -459,12 +459,20 @@ h1 {
 
 /* Responsive Design */
 @media (max-width: 600px) {
+    body {
+        overflow-y: auto; /* Allow scrolling on small screens if content overflows */
+    }
     .card {
-        padding: 2rem;
+        padding: 1.5rem;
         padding-top: 3.5rem;
+        margin: 1rem;
+        margin-bottom: 60px; /* Crucial: Pushes card up from the bottom to make space for garland */
     }
     h1 {
-        font-size: 3.5rem;
+        font-size: 3.2rem; /* Adjusted for smaller screens */
+    }
+    #sender-name-display {
+        font-size: 1.7rem !important; /* Keep it prominent but slightly smaller */
     }
     .message {
         font-size: 0.9rem;
