@@ -56,6 +56,34 @@ body {
     animation: fadeIn 1.5s ease-in-out;
 }
 
+/* Music Control Button */
+.music-button {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid var(--border-color);
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    color: var(--gold-color);
+    transition: all 0.3s ease;
+}
+
+.music-button:hover {
+    background: rgba(255, 215, 0, 0.2);
+    box-shadow: 0 0 10px var(--gold-color);
+}
+
+.music-button svg {
+    width: 20px;
+    height: 20px;
+}
+
 @keyframes fadeIn {
     from { opacity: 0; transform: scale(0.9); }
     to { opacity: 1; transform: scale(1); }
@@ -242,7 +270,8 @@ h1 {
     justify-content: center;
     align-items: center;
     pointer-events: none;
-    overflow: hidden;
+    overflow: hidden; /* Prevent wrapping or scrollbars */
+    flex-wrap: nowrap; /* Ensure it stays in one line */
 }
 
 .garland-diya {
@@ -343,3 +372,4 @@ h1 {
         flex-direction: column;
     }
 }
+
