@@ -78,8 +78,9 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        // The new URL will only contain the new sender's name
-        const newUrl = `${window.location.origin}${window.location.pathname}?from=${encodeURIComponent(yourName)}`;
+        // Add a unique timestamp to the URL to bypass WhatsApp's link preview cache
+        const cacheBuster = `v=${new Date().getTime()}`;
+        const newUrl = `${window.location.origin}${window.location.pathname}?from=${encodeURIComponent(yourName)}&${cacheBuster}`;
         
         shareLinkInput.value = newUrl;
         
