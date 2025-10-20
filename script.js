@@ -85,10 +85,10 @@ document.addEventListener('DOMContentLoaded', () => {
         
         // Create and update the WhatsApp share link
         const baseUrl = window.location.href.split('?')[0];
-        const gifPath = 'diwali.gif'; 
-        const gifUrl = baseUrl.substring(0, baseUrl.lastIndexOf('/') + 1) + gifPath;
+        const videoPath = 'diwali.mp4'; // Changed from GIF to MP4
+        const videoUrl = baseUrl.substring(0, baseUrl.lastIndexOf('/') + 1) + videoPath;
         const wishMessage = `*🪔 Happy Diwali! 🪔*\n\n${yourName} sending you this special greeting. May the festival of lights bring you joy and prosperity!\n\nSee your wish here: ${newUrl}`;
-        const whatsappMessage = `${wishMessage}\n\n${gifUrl}`;
+        const whatsappMessage = `${wishMessage}\n\n${videoUrl}`; // Using the video URL
         
         // FIX: Using your variable 'whatsappShareLink'
         whatsappShareLink.href = `https://wa.me/?text=${encodeURIComponent(whatsappMessage)}`;
