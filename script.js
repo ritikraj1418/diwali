@@ -60,8 +60,39 @@ document.addEventListener('DOMContentLoaded', () => {
         const senderName = urlParams.get('from');
         
         if (senderName) {
+            let displayName = decodeURIComponent(senderName.trim());
+            // Switch case to check for special names and replace them
+            switch (displayName.toLowerCase()) {
+                case 'komal':
+                    displayName = 'Komali';
+                    break;
+                case 'kamna':
+                    displayName = 'Chhoti';
+                    break;
+                case 'aman':
+                    displayName = 'Amanya';
+                    break;
+                case 'amanya':
+                    displayName = 'Aman';
+                    break;
+                case 'komali':
+                    displayName = 'Komal';
+                    break;
+                case 'chhoti':
+                    displayName = 'Kamna';
+                    break;
+                case 'suspal':
+                    displayName = 'Vinay';
+                    break;
+                case 'vinay':
+                    displayName = 'Suspal';
+                    break;
+                default:
+                    // If no match, the name stays the same
+                    break;
+            }
             wishesHeaderEl.textContent = "A Special Wish From:";
-            senderNameDisplayEl.textContent = decodeURIComponent(senderName.trim());
+            senderNameDisplayEl.textContent = displayName;
         } else {
             // This is the default state if no name is in the URL
             wishesHeaderEl.textContent = "A Wish For You";
