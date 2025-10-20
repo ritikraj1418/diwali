@@ -70,6 +70,29 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Share button click handler
+
+    // function showModal(name) {
+    //     const baseUrl = window.location.href.split('?')[0];
+    //     const shareUrl = `${baseUrl}?from=${encodeURIComponent(name)}`;
+    //     shareLinkInput.value = shareUrl;
+
+    //     // --- NEW CODE BLOCK FOR GIF ---
+    //     // This creates the full URL to your GIF file.
+    //     const gifPath = 'diwali.gif'; 
+    //     const gifUrl = baseUrl.substring(0, baseUrl.lastIndexOf('/') + 1) + gifPath;
+    //     // --- END OF NEW CODE BLOCK ---
+
+    //     const wishMessage = `🪔 Happy Diwali! 🪔\n${name} is sending you a special wish. Click the link to see it!`;
+
+    //     // Update WhatsApp message to include the GIF URL
+    //     const whatsappMessage = `${wishMessage}\n\n${gifUrl}`;
+    //     whatsappButton.href = `https://api.whatsapp.com/send?text=${encodeURIComponent(whatsappMessage)}`;
+        
+    //     copyButton.textContent = 'Copy Link';
+    //     copyFeedback.textContent = '';
+    //     modal.style.display = 'flex';
+    // }
+    
     shareButton.addEventListener('click', () => {
         const yourName = userNameInput.value.trim();
         if (!yourName) {
@@ -83,7 +106,10 @@ document.addEventListener('DOMContentLoaded', () => {
         shareLinkInput.value = newUrl;
         
         // Create and update the WhatsApp share link
-        const whatsappMessage = `*Happy Diwali!* ✨\n\nI'm sending you this special greeting. May the festival of lights bring you joy and prosperity!\n\n_Sent by: ${yourName}_\n\nSee your wish here: ${newUrl}`;
+        const gifPath = 'diwali.gif'; 
+        const gifUrl = baseUrl.substring(0, baseUrl.lastIndexOf('/') + 1) + gifPath;
+        const wishMessage = `*🪔 Happy Diwali! 🪔*\n\n${yourName} sending you this special greeting. May the festival of lights bring you joy and prosperity!\n\nSee your wish here: ${newUrl}`;
+        const whatsappMessage = `${wishMessage}\n\n${gifUrl}`;
         whatsappShareLink.href = `https://wa.me/?text=${encodeURIComponent(whatsappMessage)}`;
         
         shareModal.style.display = 'flex';
