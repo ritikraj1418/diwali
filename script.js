@@ -89,10 +89,14 @@ document.addEventListener('DOMContentLoaded', () => {
         const gifUrl = baseUrl.substring(0, baseUrl.lastIndexOf('/') + 1) + gifPath;
         const wishMessage = `*🪔 Happy Diwali! 🪔*\n\n${yourName} sending you this special greeting. May the festival of lights bring you joy and prosperity!\n\nSee your wish here: ${newUrl}`;
         const whatsappMessage = `${wishMessage}\n\n${gifUrl}`;
-        whatsappShareLink.href = `https://wa.me/?text=${encodeURIComponent(whatsappMessage)}`;
         
-        shareModal.style.display = 'flex';
+        // Corrected variable from your 'whatsappShareLink' to the defined 'whatsappButton'
+        whatsappButton.href = `https://wa.me/?text=${encodeURIComponent(whatsappMessage)}`;
+        
+        // Corrected variable from your 'shareModal' to the defined 'modal'
+        modal.style.display = 'flex';
         copyFeedback.textContent = '';
+        copyButton.textContent = 'Copy Link';
     });
     
     // Modal handling
